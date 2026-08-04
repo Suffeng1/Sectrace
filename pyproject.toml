@@ -1,0 +1,15 @@
+[project]
+name = "sectrace"
+version = "0.0.0"
+description = "Planned safe multi-Agent security incident audit demo"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "fastapi",
+  "pydantic>=2",
+  "networkx",
+  "pytest",
+  "playwright",
+]
