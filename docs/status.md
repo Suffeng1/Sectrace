@@ -4,7 +4,9 @@
 | --- | --- |
 | P-00 | DONE |
 | P-01 | DONE |
-| T-01 | READY |
+| R-00 | AWAITING_QA |
+| H-01 | BLOCKED |
+| T-01 | BLOCKED |
 | T-02 | BLOCKED |
 | T-03 | BLOCKED |
 | T-04 | BLOCKED |

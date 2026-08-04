@@ -7,3 +7,12 @@ __pycache__/
 outputs/demo/*.mp4
 outputs/demo/*.webm
 .superpowers/
+hiclaw/*.env
+hiclaw/**/*.env
+hiclaw/**/secrets*
+hiclaw/**/credentials*
+hiclaw/**/tokens*
+hiclaw/**/config.local.*
+outputs/demo/*terminal*.mp4
+outputs/demo/*terminal*.webm
+outputs/demo/*terminal*.log
