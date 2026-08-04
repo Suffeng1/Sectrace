@@ -8,6 +8,7 @@ outputs/demo/*.mp4
 outputs/demo/*.webm
 .superpowers/
 hiclaw/*.env
+hiclaw/start_hiclaw.py
 hiclaw/**/*.env
 hiclaw/**/secrets*
 hiclaw/**/credentials*

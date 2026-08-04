@@ -4,8 +4,8 @@
 | --- | --- |
 | P-00 | DONE |
 | P-01 | DONE |
-| R-00 | OPERATOR_ACTION_REQUIRED |
-| H-01 | BLOCKED |
+| R-00 | NON_BLOCKING_SECURITY_DEBT |
+| H-01 | READY |
 | T-01 | BLOCKED |
 | T-02 | BLOCKED |
 | T-03 | BLOCKED |
