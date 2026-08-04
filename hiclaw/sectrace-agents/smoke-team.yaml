@@ -1,0 +1,8 @@
+apiVersion: agentteams.io/v1beta1
+kind: Team
+metadata:
+  name: sectrace-smoke-team
+spec:
+  workerMembers:
+    - name: sectrace-smoke
+      role: team_leader

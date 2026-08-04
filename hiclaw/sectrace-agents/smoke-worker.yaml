@@ -1,0 +1,8 @@
+apiVersion: agentteams.io/v1beta1
+kind: Worker
+metadata:
+  name: sectrace-smoke
+spec:
+  model: qwen3.6-plus
+  runtime: openclaw
+  state: Running

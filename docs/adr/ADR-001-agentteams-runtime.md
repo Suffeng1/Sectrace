@@ -33,6 +33,10 @@ T-05 will deploy one real local HiClaw Manager and four named Workers: `sectrace
 
 T-05 acceptance evidence is: Manager page, all four named Workers, one visible S01 Matrix task chain, and a human intervention/approval record linked to the same trace. Absence of any item makes V-05 `FAIL`. No adapter is an acceptable final substitute.
 
+H-01 inspected the installed `agentteams.io/v1beta1` Worker and Team CRDs before writing resource files. Declarative resources use `agt apply -f`; visibility is verified with `agt get workers|teams <name> -o json`; Team deletion must precede Worker deletion. Worker MCP attachments use `spec.mcpServers[]` entries with `name`, full endpoint `url`, and optional `transport` (`http` or `sse`).
+
+The 2026-08-04 smoke run proved Worker `Running`, Team `Active`, and non-empty Worker, Team, and Leader-DM Matrix room references. It also exposed an embedded-runtime deletion defect: `agt delete team` reported success twice without removing the Team, leaving Worker deletion blocked by membership HTTP 409. Therefore the schema and create/visibility mechanism are accepted for H-01. Cleanup is tracked as the non-blocking environment risk `H-01-RUNTIME-CLEANUP`; direct credential-based REST workarounds and database mutation are not adopted.
+
 ## Alternatives considered
 
 ### Python adapter only
