@@ -20,3 +20,12 @@
 ## Operator action
 
 Credential rotation is required outside this repository. Completion has not been asserted because authorization to edit the repository is not evidence that the operator performed rotation.
+
+
+## QA remediation
+
+- Regression added: tracked HiClaw Worker YAML and prompt-eligible files are scanned.
+- Explicit local configuration exclusions: user-owned `hiclaw/start_hiclaw.py`, ignored environment files, secret/credential/token files, and `config.local.*`.
+- Targeted result: 4 tests passed.
+- Full regression result: 6 tests passed.
+- QA verdict remains unchanged until independent re-verification.
