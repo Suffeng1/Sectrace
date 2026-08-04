@@ -8,11 +8,11 @@
 | H-01 | DONE |
 | T-01 | DONE |
 | T-02 | DONE |
-| T-03 | READY |
-| T-04 | BLOCKED |
+| T-03 | DONE |
+| T-04 | READY |
 | T-05 | BLOCKED |
 | V-01 | DONE |
 | V-02 | DONE |
-| V-03 | BLOCKED |
+| V-03 | DONE |
 | V-04 | BLOCKED |
 | V-05 | BLOCKED |
