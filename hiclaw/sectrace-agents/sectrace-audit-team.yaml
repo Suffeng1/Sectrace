@@ -1,0 +1,16 @@
+apiVersion: agentteams.io/v1beta1
+kind: Team
+metadata:
+  name: sectrace-audit-team
+spec:
+  description: Four-role synthetic incident audit team; advice only and human-gated.
+  workerMembers:
+    - name: sectrace-commander
+      role: team_leader
+    - name: sectrace-evidence
+      role: worker
+    - name: sectrace-response
+      role: worker
+    - name: sectrace-audit
+      role: worker
+  peerMentions: true

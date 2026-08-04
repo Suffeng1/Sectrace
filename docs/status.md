@@ -10,7 +10,7 @@
 | T-02 | DONE |
 | T-03 | DONE |
 | T-04 | DONE |
-| T-05 | READY |
+| T-05 | QA_PENDING |
 | V-01 | DONE |
 | V-02 | DONE |
 | V-03 | DONE |

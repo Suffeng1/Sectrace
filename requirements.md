@@ -26,3 +26,13 @@ Prepare a safe, inspectable multi-Agent audit-demo workspace for the Agent Infra
 - Repository hygiene findings disclose only a path and rule name, never matched content.
 - The scanner does not read user-owned HiClaw local configuration.
 - Runtime inventory records only service roles and localhost ports.
+
+## T-05 acceptance criteria
+
+- Replay S01 through Commander, Evidence, Response, and Audit with one unchanged `trace_id`.
+- Expose exactly five synthetic/read-only MCP tools with v1.0 envelopes and reject unsupported execution names.
+- Keep high-risk response plans `pending_approval`; local human approval records never execute an action.
+- Validate a canonical SHA-256 ledger and project an `AuditBundle`.
+- Provide a judge-visible local UI, four production Worker prompts/YAML, one Team YAML, tests, and reproduction materials.
+- Do not deploy the production Workers, read runtime credentials, or handle `H-01-RUNTIME-CLEANUP` in this ticket.
+- The offline implementation uses installed Starlette for the thin ASGI UI boundary; FastAPI remains an optional development dependency.
