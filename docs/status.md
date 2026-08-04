@@ -9,10 +9,10 @@
 | T-01 | DONE |
 | T-02 | DONE |
 | T-03 | DONE |
-| T-04 | READY |
-| T-05 | BLOCKED |
+| T-04 | DONE |
+| T-05 | READY |
 | V-01 | DONE |
 | V-02 | DONE |
 | V-03 | DONE |
-| V-04 | BLOCKED |
+| V-04 | DONE |
 | V-05 | BLOCKED |
