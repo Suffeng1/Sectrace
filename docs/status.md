@@ -10,9 +10,9 @@
 | T-02 | DONE |
 | T-03 | DONE |
 | T-04 | DONE |
-| T-05 | QA_PENDING |
+| T-05 | DONE |
 | V-01 | DONE |
 | V-02 | DONE |
 | V-03 | DONE |
 | V-04 | DONE |
-| V-05 | BLOCKED |
+| V-05 | FAIL_LIVE_EVIDENCE |
