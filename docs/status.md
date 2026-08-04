@@ -4,7 +4,7 @@
 | --- | --- |
 | P-00 | DONE |
 | P-01 | DONE |
-| R-00 | QA_PENDING |
+| R-00 | OPERATOR_ACTION_REQUIRED |
 | H-01 | BLOCKED |
 | T-01 | BLOCKED |
 | T-02 | BLOCKED |
