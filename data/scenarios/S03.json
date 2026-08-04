@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S03",
+  "title": "Synthetic privilege elevation event",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s03_001", "event_type": "privilege_elevation", "at": "2026-08-04T10:10:00Z", "subject": "synthetic-user-c"}],
+  "expected": {"intake": "accept", "severity_hint": "medium", "classification": "inference"}
+}

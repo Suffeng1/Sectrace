@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S06",
+  "title": "Synthetic incomplete privilege trail",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s06_001", "event_type": "privilege_elevation", "at": "2026-08-04T11:10:00Z", "subject": "synthetic-user-f"}],
+  "expected": {"intake": "accept", "classification": "unknown", "evidence_level": "insufficient"}
+}

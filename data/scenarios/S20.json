@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S20",
+  "title": "High-risk rejected human approval remains non-executing",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s20_001", "event_type": "anomalous_login", "at": "2026-08-04T14:30:00Z", "region_label": "foreign-region", "subject": "synthetic-user-t"}, {"event_ref": "evt_s20_002", "event_type": "privilege_elevation", "at": "2026-08-04T14:32:00Z", "subject": "synthetic-user-t"}, {"event_ref": "evt_s20_003", "event_type": "bulk_sensitive_data_access", "at": "2026-08-04T14:34:00Z", "subject": "synthetic-user-t", "record_count": 230}],
+  "expected": {"risk_level": "high", "requires_approval": true, "approval_status": "rejected", "response_status": "pending_approval"}
+}

@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S13",
+  "title": "Synthetic low-risk review event",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s13_001", "event_type": "anomalous_login", "at": "2026-08-04T13:00:00Z", "region_label": "known-travel", "subject": "synthetic-user-m"}],
+  "expected": {"intake": "accept", "risk_level": "low", "requires_approval": false, "response_status": "draft"}
+}

@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S07",
+  "title": "Synthetic incomplete bulk-access trail",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s07_001", "event_type": "bulk_sensitive_data_access", "at": "2026-08-04T11:20:00Z", "subject": "synthetic-user-g", "record_count": 3}],
+  "expected": {"intake": "accept", "classification": "unknown", "evidence_level": "insufficient"}
+}

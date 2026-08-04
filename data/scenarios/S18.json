@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S18",
+  "title": "High-risk plan without approval is invalid",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s18_001", "event_type": "anomalous_login", "at": "2026-08-04T14:10:00Z", "region_label": "foreign-region", "subject": "synthetic-user-r"}, {"event_ref": "evt_s18_002", "event_type": "privilege_elevation", "at": "2026-08-04T14:12:00Z", "subject": "synthetic-user-r"}, {"event_ref": "evt_s18_003", "event_type": "bulk_sensitive_data_access", "at": "2026-08-04T14:14:00Z", "subject": "synthetic-user-r", "record_count": 210}],
+  "expected": {"risk_level": "high", "requires_approval": false, "contract": "reject"}
+}

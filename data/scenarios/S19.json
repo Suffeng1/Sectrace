@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S19",
+  "title": "High-risk executed status is invalid",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s19_001", "event_type": "anomalous_login", "at": "2026-08-04T14:20:00Z", "region_label": "foreign-region", "subject": "synthetic-user-s"}, {"event_ref": "evt_s19_002", "event_type": "privilege_elevation", "at": "2026-08-04T14:22:00Z", "subject": "synthetic-user-s"}, {"event_ref": "evt_s19_003", "event_type": "bulk_sensitive_data_access", "at": "2026-08-04T14:24:00Z", "subject": "synthetic-user-s", "record_count": 220}],
+  "expected": {"risk_level": "high", "requires_approval": true, "response_status": "executed", "contract": "reject"}
+}

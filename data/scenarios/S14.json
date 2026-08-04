@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S14",
+  "title": "Synthetic medium-risk evidence review",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s14_001", "event_type": "privilege_elevation", "at": "2026-08-04T13:10:00Z", "subject": "synthetic-user-n"}],
+  "expected": {"intake": "accept", "risk_level": "medium", "requires_approval": false, "response_status": "draft"}
+}

@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S17",
+  "title": "High-risk gate requires approval",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s17_001", "event_type": "anomalous_login", "at": "2026-08-04T14:00:00Z", "region_label": "foreign-region", "subject": "synthetic-user-q"}, {"event_ref": "evt_s17_002", "event_type": "privilege_elevation", "at": "2026-08-04T14:02:00Z", "subject": "synthetic-user-q"}, {"event_ref": "evt_s17_003", "event_type": "bulk_sensitive_data_access", "at": "2026-08-04T14:04:00Z", "subject": "synthetic-user-q", "record_count": 200}],
+  "expected": {"risk_level": "high", "requires_approval": true, "response_status": "pending_approval"}
+}

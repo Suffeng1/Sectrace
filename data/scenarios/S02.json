@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S02",
+  "title": "Synthetic anomalous foreign-region login",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s02_001", "event_type": "anomalous_login", "at": "2026-08-04T10:00:00Z", "region_label": "foreign-region", "subject": "synthetic-user-b"}],
+  "expected": {"intake": "accept", "severity_hint": "medium", "classification": "inference"}
+}

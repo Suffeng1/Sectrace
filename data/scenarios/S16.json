@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S16",
+  "title": "Synthetic low-risk observation",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s16_001", "event_type": "anomalous_login", "at": "2026-08-04T13:30:00Z", "region_label": "unfamiliar-region", "subject": "synthetic-user-p"}],
+  "expected": {"intake": "accept", "risk_level": "low", "requires_approval": false, "response_status": "draft"}
+}

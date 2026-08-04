@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S22",
+  "title": "Audit flags missing approval for high risk",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s22_001", "event_type": "anomalous_login", "at": "2026-08-04T15:10:00Z", "region_label": "foreign-region", "subject": "synthetic-user-v"}, {"event_ref": "evt_s22_002", "event_type": "privilege_elevation", "at": "2026-08-04T15:12:00Z", "subject": "synthetic-user-v"}, {"event_ref": "evt_s22_003", "event_type": "bulk_sensitive_data_access", "at": "2026-08-04T15:14:00Z", "subject": "synthetic-user-v", "record_count": 225}],
+  "expected": {"audit": "missing_requirements", "missing_requirement": "approval"}
+}

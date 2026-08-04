@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S08",
+  "title": "Synthetic event with unresolved relation",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s08_001", "event_type": "anomalous_login", "at": "2026-08-04T11:30:00Z", "region_label": "foreign-region", "subject": "synthetic-user-h"}],
+  "expected": {"intake": "accept", "classification": "unknown", "evidence_level": "insufficient", "risk_path": []}
+}

@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S09",
+  "title": "Synthetic malformed event missing required event type",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s09_001", "at": "2026-08-04T12:00:00Z", "subject": "synthetic-user-i"}],
+  "expected": {"intake": "reject", "reason": "missing_required_event_type"}
+}

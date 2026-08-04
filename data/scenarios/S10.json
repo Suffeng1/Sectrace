@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S10",
+  "title": "Synthetic event with invalid timestamp",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s10_001", "event_type": "anomalous_login", "at": "not-a-timestamp", "subject": "synthetic-user-j"}],
+  "expected": {"intake": "reject", "reason": "invalid_timestamp"}
+}

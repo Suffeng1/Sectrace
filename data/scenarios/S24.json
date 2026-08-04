@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S24",
+  "title": "Audit detects tampering and keeps replay stable",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s24_001", "event_type": "anomalous_login", "at": "2026-08-04T15:30:00Z", "region_label": "foreign-region", "subject": "synthetic-user-x"}],
+  "expected": {"audit": "integrity_check", "tampered_hash": "reject", "valid_replay": "stable"}
+}

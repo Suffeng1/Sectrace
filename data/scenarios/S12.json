@@ -1,0 +1,7 @@
+{
+  "scenario_id": "S12",
+  "title": "Synthetic unsupported event type",
+  "real_data": false,
+  "events": [{"event_ref": "evt_s12_001", "event_type": "unsupported_synthetic_event", "at": "2026-08-04T12:30:00Z", "subject": "synthetic-user-l"}],
+  "expected": {"intake": "reject", "reason": "unsupported_event_type"}
+}
