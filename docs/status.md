@@ -6,12 +6,12 @@
 | P-01 | DONE |
 | R-00 | NON_BLOCKING_SECURITY_DEBT |
 | H-01 | DONE |
-| T-01 | READY |
-| T-02 | BLOCKED |
+| T-01 | DONE |
+| T-02 | READY |
 | T-03 | BLOCKED |
 | T-04 | BLOCKED |
 | T-05 | BLOCKED |
-| V-01 | BLOCKED |
+| V-01 | DONE |
 | V-02 | BLOCKED |
 | V-03 | BLOCKED |
 | V-04 | BLOCKED |
