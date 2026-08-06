@@ -14,6 +14,24 @@ WORKERS = (
     "sectrace-audit",
 )
 
+MCPORTER_CALLS = {
+    "sectrace-commander": (
+        "mcporter call sectrace.intake.create_incident scenario_id=S01",
+    ),
+    "sectrace-evidence": (
+        "mcporter call sectrace.evidence.analyze_case trace_id=<trace_id>",
+        "mcporter call sectrace.ledger.get_trace trace_id=<trace_id>",
+    ),
+    "sectrace-response": (
+        "mcporter call sectrace.response.create_plan trace_id=<trace_id>",
+        "mcporter call sectrace.ledger.get_trace trace_id=<trace_id>",
+    ),
+    "sectrace-audit": (
+        "mcporter call sectrace.audit.build_bundle trace_id=<trace_id>",
+        "mcporter call sectrace.ledger.get_trace trace_id=<trace_id>",
+    ),
+}
+
 
 def _load(path: Path) -> dict:
     assert path.is_file(), f"missing production resource: {path.name}"
@@ -23,7 +41,6 @@ def _load(path: Path) -> dict:
 def test_four_workers_match_proven_crd_and_prompt_sources() -> None:
     for name in WORKERS:
         resource = _load(AGENT_DIR / f"{name}.yaml")
-        prompt = (PROMPT_DIR / f"{name}.md").read_text(encoding="utf-8").strip()
 
         assert resource["apiVersion"] == "agentteams.io/v1beta1"
         assert resource["kind"] == "Worker"
@@ -31,7 +48,6 @@ def test_four_workers_match_proven_crd_and_prompt_sources() -> None:
         assert resource["spec"]["model"] == "qwen3.6-plus"
         assert resource["spec"]["runtime"] == "openclaw"
         assert resource["spec"]["state"] == "Running"
-        assert resource["spec"]["agents"].strip() == prompt
         assert resource["spec"]["mcpServers"] == [
             {
                 "name": "sectrace",
@@ -39,6 +55,20 @@ def test_four_workers_match_proven_crd_and_prompt_sources() -> None:
                 "transport": "http",
             }
         ]
+
+
+def test_workers_require_mcporter_instead_of_direct_mcp_http() -> None:
+    for name, expected_calls in MCPORTER_CALLS.items():
+        resource = _load(AGENT_DIR / f"{name}.yaml")
+        prompt = resource["spec"]["agents"]
+
+        assert "只能通过已安装的 `mcporter` CLI" in prompt
+        assert "禁止直接使用 HTTP、curl、浏览器或 fetch 访问 MCP URL" in prompt
+        for expected_call in expected_calls:
+            assert f"`{expected_call}`" in prompt
+        assert resource["spec"]["mcpServers"][0]["url"] == (
+            "http://host.docker.internal:19090/mcp"
+        )
 
 
 def test_production_team_has_exact_role_order() -> None:
