@@ -30,6 +30,15 @@ UNTRACKED_RELEASE_ROOTS = {
     "tests",
 }
 RULES = {
+    "windows_user_directory": re.compile(
+        r"\b[A-Za-z]:[\\/]Users[\\/](?!<redacted>|<user>|USERNAME\b)[^\\/\s`\"']+",
+        re.IGNORECASE,
+    ),
+    "local_temporary_path": re.compile(
+        r"\b[A-Za-z]:[\\/](?:Users[\\/][^\\/\s`\"']+[\\/])?"
+        r"(?:AppData[\\/]Local[\\/]Temp|tmp)[\\/]",
+        re.IGNORECASE,
+    ),
     "openai_key_prefix": re.compile(r"\b" + "s" + "k-", re.IGNORECASE),
     "api_key_assignment": re.compile(
         r"\bAPI"
@@ -53,10 +62,27 @@ RULES = {
         r"\b" + "Bearer" + r"\s+(?!<redacted|redacted\b)[A-Za-z0-9._~+/-]{8,}=*",
         re.IGNORECASE,
     ),
+    "bearer_label_literal": re.compile(
+        r"\bBearer\s+token\s*:\s*[`\"']?"
+        r"(?!<redacted|redacted\b)[A-Za-z0-9._~+/-]{8,}=*",
+        re.IGNORECASE,
+    ),
+    "password_json_literal": re.compile(
+        r"[\"']pass" + r"word[\"']\s*:\s*[\"']"
+        r"(?!<redacted|redacted\b|\$\{|\{\{)[^\"'\r\n]{8,}",
+        re.IGNORECASE,
+    ),
     "query_access_token": re.compile(
         r"[?&]access" + r"_token=(?!<redacted|redacted\b)[^&\s`\"']{8,}",
         re.IGNORECASE,
     ),
+    "private_key_material": re.compile(
+        r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"
+    ),
+    "github_token_prefix": re.compile(
+        r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})"
+    ),
+    "aws_access_key_prefix": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
 }
 
 

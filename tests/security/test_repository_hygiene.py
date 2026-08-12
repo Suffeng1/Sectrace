@@ -1,4 +1,5 @@
 from pathlib import Path
+import subprocess
 
 import pytest
 
@@ -10,6 +11,77 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 def test_tracked_repository_has_no_credential_like_values() -> None:
     assert scan_repository(REPO_ROOT) == []
+
+
+def test_local_secret_and_runtime_paths_are_ignored() -> None:
+    candidates = {
+        ".env.local",
+        "service.env",
+        "server.pem",
+        "server.key",
+        "server.pfx",
+        "server.p12",
+        "logs/server.log",
+        "secrets/service.json",
+        "credentials/matrix.json",
+        "tokens/mcp.txt",
+        "secrets.json",
+        "credentials.json",
+        "tokens.json",
+        "service.secret",
+        "service.secrets",
+        "id_rsa",
+        "id_ed25519",
+        "config/config.local.json",
+        ".codex-security-scans/run/report.json",
+        "outputs/demo/recordings/event.json",
+        "runtime/state.json",
+        "tmp/scan.json",
+        "temp/scan.txt",
+        "data/mcp-state/tr_local.json",
+    }
+    result = subprocess.run(
+        [
+            "git",
+            "-c",
+            "core.quotePath=false",
+            "-c",
+            "core.excludesFile=NUL",
+            "check-ignore",
+            "--no-index",
+            "--",
+            *sorted(candidates),
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert set(result.stdout.splitlines()) == candidates
+    assert result.stderr == ""
+
+
+@pytest.mark.parametrize(
+    ("content", "rule"),
+    [
+        ("C:" + "\\Users\\local-user\\project", "windows_user_directory"),
+        ("C:" + "\\tmp\\scan-output", "local_temporary_path"),
+        ("-----BEGIN " + "PRIVATE KEY-----", "private_key_material"),
+        ("gh" + "p_" + "a" * 24, "github_token_prefix"),
+        ("AK" + "IA" + "A" * 16, "aws_access_key_prefix"),
+    ],
+)
+def test_public_release_privacy_and_credential_forms_are_reported(
+    tmp_path: Path, content: str, rule: str
+) -> None:
+    candidate = tmp_path / "public.md"
+    candidate.write_text(content, encoding="utf-8")
+
+    findings = scan_repository(tmp_path, tracked_files=[candidate])
+
+    assert findings == [{"path": "public.md", "rule": rule}]
+    assert content not in repr(findings)
 
 
 def test_findings_disclose_only_path_and_rule_name(tmp_path: Path) -> None:
@@ -66,6 +138,8 @@ def test_untracked_nonignored_release_candidate_is_scanned(
     [
         ("Admin pass" + "word: `synthetic-value`", "password_literal"),
         ("Authorization: " + "Bear" + "er synthetic-token-value", "bearer_credential"),
+        ("Bear" + "er token: `synthetic-token-value`", "bearer_label_literal"),
+        ('{"pass' + 'word": "synthetic-value"}', "password_json_literal"),
         ("?access" + "_token=synthetic-token-value", "query_access_token"),
     ],
 )
