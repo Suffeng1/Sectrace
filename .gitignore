@@ -46,6 +46,9 @@ hiclaw/**/config.local.*
 outputs/demo/*terminal*.mp4
 outputs/demo/*terminal*.webm
 outputs/demo/*terminal*.log
+
+# Local competition submission packages
+outputs/submission/
 data/mcp-state/
 mcp_server.log
 mcp_server.err.log

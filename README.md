@@ -374,4 +374,8 @@ git diff --check
 
 ## License
 
-仓库当前未附带开源许可证。除非仓库所有者后续明确添加 LICENSE，否则默认保留全部权利。
+SecTrace is licensed under the Apache License 2.0.
+
+Copyright 2026 Suffeng1.
+
+See [LICENSE](LICENSE) for the full license text. Third-party dependencies and external services remain subject to their respective licenses and terms.
