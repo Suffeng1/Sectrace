@@ -17,3 +17,14 @@ def test_build_incident_from_s01() -> None:
     assert incident.tasks == ["collect_evidence", "plan_response", "audit"]
     assert incident.status == "open"
     assert incident.trace_id
+
+
+def test_build_incident_from_s05_defaults_severity_to_low() -> None:
+    scenario_path = Path(__file__).parents[2] / "data" / "scenarios" / "S05.json"
+    scenario = json.loads(scenario_path.read_text(encoding="utf-8"))
+
+    incident = build_incident(scenario)
+
+    assert incident.scenario_id == "S05"
+    assert incident.severity_hint == "low"
+    assert incident.status == "open"

@@ -39,8 +39,25 @@ Open `http://127.0.0.1:19080`, select “重放 S01”, and show the pending hum
 python -m src.app.mcp_server
 ```
 
-The Streamable HTTP endpoint is `http://127.0.0.1:19090/mcp`. It exposes exactly the five tools documented in `outputs/demo/evidence-index.md`. Unsupported or action-execution names are rejected.
+The Streamable HTTP endpoint is `http://127.0.0.1:19090/mcp`. It exposes exactly the six tools documented in `outputs/demo/evidence-index.md`. Unsupported or action-execution names are rejected.
 
 ## AgentTeams production-resource boundary
 
 The four Worker files and `sectrace-audit-team.yaml` are committed reproduction assets only. T-05 does not apply or deploy them. The earlier H-01 smoke resources remain separate, and `H-01-RUNTIME-CLEANUP` is not handled by this demo.
+
+## Verified live evidence
+
+The local replay above is the deterministic judge demo. Separate authorized
+live evidence is already recorded and should be shown from the redacted
+documents rather than recreated during a presentation:
+
+- `docs/verification/R-09-runtime-governance-evidence.md` — current Manager,
+  four Workers, Team, and Higress/model-gateway projection;
+- `docs/verification/V-R08BF-R08BG-independent-qa.md` — clean distinct-trace
+  four-role Matrix chain, human approval, and qualified Audit;
+- `docs/verification/R-09BB-live-mcp-tool-attestation.md` — hardened
+  server-fetched Matrix approval and Commander-owned MCP call;
+- `docs/verification/V-05-final-reconciliation.md` — final acceptance mapping.
+
+Do not resend S01, repeat approval, expose Matrix credentials, or invoke any
+real action as part of the demo.

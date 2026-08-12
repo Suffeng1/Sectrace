@@ -15,4 +15,6 @@
 | V-02 | DONE |
 | V-03 | DONE |
 | V-04 | DONE |
-| V-05 | FAIL_LIVE_EVIDENCE |
+| V-08 | DONE_CLEAN_DISTINCT_TRACE |
+| S-09 | DONE |
+| V-05 | DONE |

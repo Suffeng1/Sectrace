@@ -1,0 +1,21 @@
+# Handoff: R-08AX
+
+- Role: 00 control and integration
+- Ticket: MCP trace persistence after process restart
+- Contract version: 1.0
+- Modified files:
+  - `.gitignore`
+  - `README.md`
+  - `src/app/mcp_adapter.py`
+  - `src/app/mcp_server.py`
+  - `tests/integration/test_mcp_state_persistence.py`
+  - `docs/verification/R-08AX-mcp-state-persistence.md`
+  - `docs/handoffs/H-R08AX.md`
+- RED evidence: initial 3 failed because the old Adapter rejected `state_dir`; successive QA corrections reproduced 2 approval/stage failures with 3 passing, 2 valid-hash state-machine bypasses with 5 passing, and 2 legal-model projection/status gaps with 7 passing
+- GREEN evidence: persistence 9 passed; focused MCP 21 passed; full suite 63 passed; `git diff --check` passed
+- Main behavior: a synthetic trace and its complete ledger/models survive Adapter reconstruction and can continue through the human approval gate to Audit
+- Safety behavior: corrupted or tampered state fails closed without content disclosure; no real action capability was added
+- Runtime verification: not run; requires separate authorization
+- Commit/push: not performed
+- QA status: PASS in `docs/verification/V-R08AX-fourth-independent-qa.md`; the three earlier QA FAIL records remain authoritative for their respective superseded implementations
+- QA coverage: deterministic AuditReview equality, reachable Approval states, exact event sequence and object references, valid-rehash attacks, atomic replacement, reconstruction completeness, non-persistent default test isolation, and preservation of the existing approval gate

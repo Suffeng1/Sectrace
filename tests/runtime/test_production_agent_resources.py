@@ -16,19 +16,20 @@ WORKERS = (
 
 MCPORTER_CALLS = {
     "sectrace-commander": (
-        "mcporter call sectrace.intake.create_incident scenario_id=S01",
+        "mcporter call --server sectrace --tool sectrace.intake.create_incident scenario_id=S01",
+        "mcporter call --server sectrace --tool sectrace.ledger.log_approval trace_id=<trace_id> decision=<approved_or_rejected> plan_ref=<plan_ref> approval_event_id=<matrix_event_id>",
     ),
     "sectrace-evidence": (
-        "mcporter call sectrace.evidence.analyze_case trace_id=<trace_id>",
-        "mcporter call sectrace.ledger.get_trace trace_id=<trace_id>",
+        "mcporter call --server sectrace --tool sectrace.evidence.analyze_case trace_id=<trace_id>",
+        "mcporter call --server sectrace --tool sectrace.ledger.get_trace trace_id=<trace_id>",
     ),
     "sectrace-response": (
-        "mcporter call sectrace.response.create_plan trace_id=<trace_id>",
-        "mcporter call sectrace.ledger.get_trace trace_id=<trace_id>",
+        "mcporter call --server sectrace --tool sectrace.response.create_plan trace_id=<trace_id>",
+        "mcporter call --server sectrace --tool sectrace.ledger.get_trace trace_id=<trace_id>",
     ),
     "sectrace-audit": (
-        "mcporter call sectrace.audit.build_bundle trace_id=<trace_id>",
-        "mcporter call sectrace.ledger.get_trace trace_id=<trace_id>",
+        "mcporter call --server sectrace --tool sectrace.audit.build_bundle trace_id=<trace_id>",
+        "mcporter call --server sectrace --tool sectrace.ledger.get_trace trace_id=<trace_id>",
     ),
 }
 
@@ -45,7 +46,7 @@ def test_four_workers_match_proven_crd_and_prompt_sources() -> None:
         assert resource["apiVersion"] == "agentteams.io/v1beta1"
         assert resource["kind"] == "Worker"
         assert resource["metadata"]["name"] == name
-        assert resource["spec"]["model"] == "qwen3.6-plus"
+        assert resource["spec"]["model"] == "deepseek-chat"
         assert resource["spec"]["runtime"] == "openclaw"
         assert resource["spec"]["state"] == "Running"
         assert resource["spec"]["mcpServers"] == [

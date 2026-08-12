@@ -33,6 +33,8 @@ Allowed enum values and field types are exactly those declared by the Pydantic m
 - `ResponsePlan(risk_level="high", requires_approval=False)` is invalid.
 - A high-risk `ResponsePlan` with `status="executed"` is invalid even when approval is requested.
 - `ApprovalRecord.approver_role` is only `human_operator`; an Agent cannot approve a plan.
+- An MCP caller cannot self-assert `human_operator`. Approval requires a Matrix event fetched with server-held credentials from the configured room, sent by the configured human identity, and exactly bound to the current `trace_id`, `plan_ref`, and decision.
+- The approval ledger stores SHA-256 digests of the verified Matrix event ID and reason, not the raw event ID, room ID, sender ID, access token, or reason.
 - Model fields do not carry credentials, live endpoint data, or execution instructions.
 
 ## Inter-Agent handoff contract

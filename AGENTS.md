@@ -17,3 +17,10 @@
 - Treat high-risk output as advice only and require a human gate.
 - Do not invent evidence; preserve `trace_id` across every handoff.
 - Never include secrets in reports.
+
+## Mandatory resume preflight
+
+- At the start of every **new conversation**, after a **computer reboot**, and after any meaningful runtime change, choose the **lowest necessary mode** and run `scripts/sectrace-preflight.ps1` before work begins.
+- Use `code` for repository-only work, `runtime` for Docker/AgentTeams/MCP work, and `live` before any Matrix or S01 activity. Historical PASS evidence never replaces the current preflight.
+- Every **runtime mutation** still requires separate, explicit user authorization. The preflight **must not be used as a launcher** or treated as permission to start, stop, restart, apply, delete, send, retry, approve, commit, or push.
+- Follow `docs/runtime/reboot-preflight.md`; stop at the first blocked category and never touch `sectrace-smoke` as part of resume checks.

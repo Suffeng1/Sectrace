@@ -1,5 +1,7 @@
 __pycache__/
 .pytest_cache/
+.pytest-basetemp-*/
+.pytest-basetemp/
 .venv/
 .env
 *.db
@@ -17,3 +19,6 @@ hiclaw/**/config.local.*
 outputs/demo/*terminal*.mp4
 outputs/demo/*terminal*.webm
 outputs/demo/*terminal*.log
+data/mcp-state/
+mcp_server.log
+mcp_server.err.log

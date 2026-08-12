@@ -13,3 +13,14 @@ def test_rejects_real_data_marker() -> None:
 
     with pytest.raises(ValueError, match="synthetic or de-identified"):
         normalize_scenario(scenario)
+
+
+def test_defaults_missing_severity_hint_to_low() -> None:
+    scenario = {
+        "scenario_id": "S-incomplete",
+        "real_data": False,
+        "events": [],
+        "expected": {},
+    }
+
+    assert normalize_scenario(scenario)["expected"]["severity_hint"] == "low"
