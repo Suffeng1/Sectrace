@@ -16,4 +16,5 @@ dev = [
   "networkx",
   "pytest",
   "playwright",
+  "jsonschema>=4,<5",
 ]

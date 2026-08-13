@@ -19,7 +19,12 @@ def test_defaults_missing_severity_hint_to_low() -> None:
     scenario = {
         "scenario_id": "S-incomplete",
         "real_data": False,
-        "events": [],
+        "events": [{
+            "event_ref": "evt_incomplete_001",
+            "event_type": "anomalous_login",
+            "at": "2026-08-04T09:00:00Z",
+            "subject": "synthetic-user-incomplete",
+        }],
         "expected": {},
     }
 
