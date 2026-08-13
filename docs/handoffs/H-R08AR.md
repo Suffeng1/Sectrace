@@ -48,3 +48,9 @@ handoff. The current status remains `QA_PENDING`.
 
 No runtime mutation, S01, approval, commit, or push occurred. Ask 05 for a
 fresh independent QA; do not reuse prior R-08AR QA.
+
+## Final superseding status
+
+The corrected implementation subsequently received independent `PASS` in
+`docs/verification/V-R08AR-corrected-independent-qa.md`. The earlier withdrawn
+and HOLD records remain historical and do not authorize runtime or live work.

@@ -9,3 +9,9 @@
 - Safety: synthetic only; Response not executed; no real action
 - Evidence: `docs/verification/R-09BB-live-mcp-tool-attestation.md`
 - Outcome: S-09 live MCP-tool gate closed; proceed to V-05 final reconciliation
+
+## Superseded status
+
+The requested final reconciliation was later completed and passed in
+`docs/verification/V-05-final-reconciliation.md`. This addition updates only
+the tail status; it does not reinterpret the recorded live event.

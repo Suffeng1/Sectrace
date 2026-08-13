@@ -10,7 +10,9 @@ SecTrace 是一个面向安全事件分析与审计演示的多 Agent 协作项�
 - V-08 clean distinct trace：PASS。
 - S-09 Codex Security：PASS。
 - V-05 最终验收：PASS。
-- 当前全量测试：`114 passed`。
+- 当前 OPT2-00 候选工作树全量测试：`125 passed`。历史验证记录中的
+  `114 passed`/`122 passed` 是各自当时提交或工作树的 point-in-time 结果，
+  不被回写为当前数字。
 
 详细结果见 [交付状态](docs/status.md)、[V-05 最终验收](docs/verification/V-05-final-reconciliation.md) 和 [演示证据索引](outputs/demo/evidence-index.md)。
 

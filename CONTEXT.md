@@ -4,7 +4,7 @@
 
 SecTrace has one fixed main case: a synthetic, de-identified suspected account-compromise incident. It is a safe demonstration only, not a connection to any real environment.
 
-## Planned Agents
+## Implemented Agents
 
 | Agent | Input | Output | Safety boundary |
 | --- | --- | --- | --- |
@@ -13,7 +13,9 @@ SecTrace has one fixed main case: a synthetic, de-identified suspected account-c
 | Response | scoped findings and risk context | advice-only response options | no security action; high risk is human-gated |
 | Audit | Agent messages and decisions | traceable audit summary | preserves `trace_id`; no secrets in reports |
 
-Contract v1.0 is pending P-01. AgentTeams is the collaboration baseline. A JSONL audit ledger is planned to preserve the handoffs and decisions.
+Contract v1.0, AgentTeams collaboration resources, and the canonical hash-chained
+audit ledger are implemented. Runtime and live readiness still require the
+current lowest-necessary preflight; historical PASS evidence is point-in-time.
 
 ## Six-role workflow
 

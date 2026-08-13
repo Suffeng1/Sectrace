@@ -29,3 +29,10 @@
 - Evidence: `docs/verification/R-08BG-clean-s01-final-closure.md`
 - Next step: independent 05 QA of the complete R-08BF/R-08BG candidate; do
   not declare V-08 PASS before that verdict
+
+## Superseded status
+
+The `QA_PENDING` result and next step above are preserved as the point-in-time
+handoff state. Independent QA later passed R-08BF/R-08BG and V-08 in
+`docs/verification/V-R08BF-R08BG-independent-qa.md`; the historical earlier
+FAIL/contaminated candidates remain unchanged.
