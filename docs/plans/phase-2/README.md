@@ -88,7 +88,21 @@ preflight 只是只读门禁，不是 launcher。启动、停止、重启、配�
 - 每个开发任务必须先 RED 后 GREEN；05 在 owner Handoff 完成后独立复现。
 - 00 集成时不得把来源不明或未经 QA 的改动一起暂存。
 
-### 4.3 完成报告统一格式
+### 4.3 总控通知协议
+
+- 总控创建任何新任务时，必须在任务 prompt 中写入当前总控任务的
+  `CONTROLLER_THREAD_ID` 和 `CONTROLLER_HOST_ID`。
+- 子任务在出现 `COMPLETE`、`BLOCKED`、`AUTH_REQUIRED`、`QA_PASS` 或
+  `QA_FAIL` 时，必须先调用任务消息工具向总控发送结构化状态，再结束自己的回合。
+- 消息至少包含：任务 ID、状态、测试结果、修改文件、阻塞或下一交接，以及是否发生
+  commit/push/runtime/live 操作。
+- 子任务自己的 final answer 不等同于总控通知；禁止只结束子任务而等待用户提醒总控。
+- 若消息工具不可用或发送失败，子任务必须在 final answer 标记
+  `CONTROLLER_NOTIFY_FAILED`；总控必须通过 `wait_threads` 主动接管。
+- 总控仍必须记录并等待所有活动任务。主动通知只用于及时唤醒，不替代独立 QA、阶段门禁
+  或用户授权。
+
+### 4.4 完成报告统一格式
 
 ```text
 STATUS:
@@ -103,6 +117,7 @@ NEW_BEHAVIOR:
 UNCHANGED_SAFETY_BOUNDARIES:
 KNOWN_LIMITATIONS:
 NEXT_HANDOFF:
+CONTROLLER_NOTIFIED: true | false
 ```
 
 ## 5. 执行路线图

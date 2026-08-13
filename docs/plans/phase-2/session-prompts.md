@@ -2,6 +2,13 @@
 
 本文件给 00–05 新会话作为最小任务入口。每个会话必须先读根 `AGENTS.md` 和 `docs/plans/phase-2/README.md`，不得只凭本清单实施。
 
+总控创建任务时必须将以下占位符替换为真实值：
+
+```text
+CONTROLLER_THREAD_ID: <总控任务 thread_id>
+CONTROLLER_HOST_ID: <总控任务 host_id>
+```
+
 ## 通用开场
 
 ```text
@@ -20,6 +27,11 @@ shared contract 问题只写 Handoff 给 00。
 不得纳入其他 owner 的修改。
 不得执行 runtime mutation、Matrix send/approval、commit 或 push；这些都需要用户单独授权。
 严格 RED -> GREEN -> focused tests -> broad tests -> Handoff。
+
+在 COMPLETE、BLOCKED、AUTH_REQUIRED、QA_PASS 或 QA_FAIL 时，先使用
+send_message_to_thread 向 CONTROLLER_THREAD_ID/CONTROLLER_HOST_ID 发送结构化状态，
+再输出本任务 final answer。消息必须包含任务 ID、状态、测试、文件、阻塞/下一交接和
+commit/push/runtime/live 情况。若发送失败，在 final answer 写 CONTROLLER_NOTIFY_FAILED。
 ```
 
 ## 00：OPT2-00 事实冻结
@@ -126,4 +138,5 @@ NEW_BEHAVIOR:
 UNCHANGED_SAFETY_BOUNDARIES:
 KNOWN_LIMITATIONS:
 NEXT_HANDOFF:
+CONTROLLER_NOTIFIED: true | false
 ```
