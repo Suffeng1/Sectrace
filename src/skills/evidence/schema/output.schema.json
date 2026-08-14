@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sectrace.local/skills/evidence/1.0.0/output.schema.json",
+  "title": "SecTrace Evidence Skill output",
+  "type": "object",
+  "required": ["evidence_items", "risk_path"],
+  "properties": {
+    "evidence_items": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/evidence_item"}},
+    "risk_path": {"type": "array", "maxItems": 3, "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"}}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "evidence_item": {"type": "object", "required": ["evidence_id", "trace_id", "source_ref", "statement", "classification", "confidence", "evidence_level", "related_event_refs"], "properties": {"evidence_id": {"type": "string", "pattern": "^ev_[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"}, "trace_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"}, "source_ref": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"}, "statement": {"type": "string", "minLength": 1, "maxLength": 512}, "classification": {"enum": ["fact", "inference", "unknown"]}, "confidence": {"enum": ["low", "medium", "high"]}, "evidence_level": {"enum": ["insufficient", "corroborated", "strong"]}, "related_event_refs": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"}}}, "additionalProperties": false}
+  }
+}
