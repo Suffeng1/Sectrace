@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "contract_schema_version": "1.0",
+  "role_chain": ["Commander", "Evidence", "Response", "Audit"],
+  "skills": [
+    {
+      "name": "sectrace-intake",
+      "description": "Validate and normalize supplied synthetic SecTrace scenarios before Commander creates an IncidentCase, without external access or actions.",
+      "version": "1.0.0",
+      "role": "Commander",
+      "skill_path": "src/skills/intake/SKILL.md",
+      "changelog_path": "src/skills/intake/CHANGELOG.md",
+      "entrypoint": "src.skills.intake.normalize.normalize_scenario",
+      "input_schema": "src/skills/intake/schema/input.schema.json",
+      "output_schema": "src/skills/intake/schema/output.schema.json",
+      "mcp_tools": [],
+      "lifecycle": {"stage": "versioned", "status": "qa_passed_registry_pending_release", "rollback": "restore_skill_directory_and_registry_entry"},
+      "evaluation_scope": {"scope": "full_local_pipeline_only", "evidence": "docs/verification/V-OPT2-02-fourth-corrected-independent-qa.md", "per_skill_score": "not_claimed", "runtime_live_status": "not_claimed"},
+      "official_skill": false,
+      "installation": "not_installed"
+    },
+    {
+      "name": "sectrace-evidence",
+      "description": "Analyze supplied synthetic SecTrace scenario events into sourced EvidenceItem values and a deterministic risk path without external access or actions.",
+      "version": "1.0.0",
+      "role": "Evidence",
+      "skill_path": "src/skills/evidence/SKILL.md",
+      "changelog_path": "src/skills/evidence/CHANGELOG.md",
+      "entrypoint": "src.agents.evidence.service.analyze_case",
+      "input_schema": "src/skills/evidence/schema/input.schema.json",
+      "output_schema": "src/skills/evidence/schema/output.schema.json",
+      "mcp_tools": [],
+      "lifecycle": {"stage": "versioned", "status": "qa_passed_registry_pending_release", "rollback": "restore_skill_directory_and_registry_entry"},
+      "evaluation_scope": {"scope": "full_local_pipeline_only", "evidence": "docs/verification/V-OPT2-02-fourth-corrected-independent-qa.md", "per_skill_score": "not_claimed", "runtime_live_status": "not_claimed"},
+      "official_skill": false,
+      "installation": "not_installed"
+    },
+    {
+      "name": "response",
+      "description": "Create deterministic, advice-only SecTrace ResponsePlan objects from validated synthetic EvidenceItem lists. Use when turning existing Response-stage evidence into a bounded high-risk pending-approval plan or low-risk draft without executing actions, altering approvals, or calling MCP tools.",
+      "version": "1.0.0",
+      "role": "Response",
+      "skill_path": "src/skills/response/SKILL.md",
+      "changelog_path": "src/skills/response/CHANGELOG.md",
+      "entrypoint": "src.agents.response.service.create_response_plan",
+      "input_schema": "src/skills/response/schema/input.schema.json",
+      "output_schema": "src/skills/response/schema/output.schema.json",
+      "mcp_tools": [],
+      "lifecycle": {"stage": "versioned", "status": "qa_passed_registry_pending_release", "rollback": "restore_skill_directory_and_registry_entry"},
+      "evaluation_scope": {"scope": "full_local_pipeline_only", "evidence": "docs/verification/V-OPT2-02-fourth-corrected-independent-qa.md", "per_skill_score": "not_claimed", "runtime_live_status": "not_claimed"},
+      "official_skill": false,
+      "installation": "not_installed"
+    },
+    {
+      "name": "audit",
+      "description": "Independently validate supplied synthetic SecTrace Incident, Evidence, Response, Approval, and canonical ledger outputs into a deterministic AuditReview. Use when checking a complete approved chain for trace continuity, reference binding, and ledger integrity without creating, approving, executing, or modifying anything.",
+      "version": "1.0.0",
+      "role": "Audit",
+      "skill_path": "src/skills/audit/SKILL.md",
+      "changelog_path": "src/skills/audit/CHANGELOG.md",
+      "entrypoint": "src.agents.audit.service.build_audit_review",
+      "input_schema": "src/skills/audit/schema/input.schema.json",
+      "output_schema": "src/skills/audit/schema/output.schema.json",
+      "mcp_tools": [],
+      "lifecycle": {"stage": "versioned", "status": "qa_passed_registry_pending_release", "rollback": "restore_skill_directory_and_registry_entry"},
+      "evaluation_scope": {"scope": "full_local_pipeline_only", "evidence": "docs/verification/V-OPT2-02-fourth-corrected-independent-qa.md", "per_skill_score": "not_claimed", "runtime_live_status": "not_claimed"},
+      "official_skill": false,
+      "installation": "not_installed"
+    }
+  ]
+}

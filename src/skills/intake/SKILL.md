@@ -1,3 +1,8 @@
+---
+name: sectrace-intake
+description: Validate and normalize supplied synthetic SecTrace scenarios before Commander creates an IncidentCase, without external access or actions.
+---
+
 # SecTrace Intake Skill
 
 - Version: `1.0.0`
