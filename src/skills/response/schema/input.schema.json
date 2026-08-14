@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sectrace.local/skills/response/1.0.0/input.schema.json",
+  "title": "SecTrace Response Skill input",
+  "type": "array",
+  "minItems": 1,
+  "maxItems": 16,
+  "uniqueItems": true,
+  "items": {"$ref": "#/$defs/evidenceItem"},
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"},
+    "traceId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"},
+    "safeStatement": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?![\\s\\S]*\\b(?:[Aa][Pp][Ii][_-]?[Kk][Ee][Yy]|[Ss][Ee][Cc][Rr][Ee][Tt]|[Tt][Oo][Kk][Ee][Nn]|[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]|[Pp][Aa][Ss][Ss][Ww][Dd]|[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]|[Cc][Rr][Ee][Dd][Ee][Nn][Tt][Ii][Aa][Ll])\\b\\s*[:=])(?![\\s\\S]*(?:[A-Za-z]:[\\\\/]|\\\\\\\\[^\\s\\\\/]+|(?:^|[\\s\\\"'=(:])/(?:[^\\s\\\\/]+)|(?:^|[\\s\\\"'=(:])(?:\\.{1,2}|[Tt][Ee][Mm][Pp]|[Tt][Mm][Pp])[\\\\/]))[\\s\\S]+$"
+    },
+    "evidenceItem": {
+      "type": "object",
+      "required": ["evidence_id", "trace_id", "source_ref", "statement", "classification", "confidence", "evidence_level", "related_event_refs"],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/identifier"},
+        "trace_id": {"$ref": "#/$defs/traceId"},
+        "source_ref": {"$ref": "#/$defs/identifier"},
+        "statement": {"$ref": "#/$defs/safeStatement"},
+        "classification": {"enum": ["fact", "inference", "unknown"]},
+        "confidence": {"enum": ["low", "medium", "high"]},
+        "evidence_level": {"enum": ["insufficient", "corroborated", "strong"]},
+        "related_event_refs": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/identifier"}}
+      },
+      "additionalProperties": false
+    }
+  }
+}

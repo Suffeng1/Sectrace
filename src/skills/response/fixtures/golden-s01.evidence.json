@@ -1,0 +1,5 @@
+[
+  {"evidence_id": "ev_evt_s01_001", "trace_id": "tr_s01", "source_ref": "evt_s01_001", "statement": "Supplied synthetic event records anomalous_login.", "classification": "fact", "confidence": "high", "evidence_level": "strong", "related_event_refs": ["evt_s01_001"]},
+  {"evidence_id": "ev_evt_s01_002", "trace_id": "tr_s01", "source_ref": "evt_s01_002", "statement": "Supplied synthetic event records privilege_elevation.", "classification": "fact", "confidence": "high", "evidence_level": "strong", "related_event_refs": ["evt_s01_002"]},
+  {"evidence_id": "ev_evt_s01_003", "trace_id": "tr_s01", "source_ref": "evt_s01_003", "statement": "Supplied synthetic event records bulk_sensitive_data_access.", "classification": "fact", "confidence": "high", "evidence_level": "strong", "related_event_refs": ["evt_s01_003"]}
+]

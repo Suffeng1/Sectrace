@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sectrace.local/skills/response/1.0.0/output.schema.json",
+  "title": "SecTrace Response Skill output",
+  "type": "object",
+  "required": ["plan_id", "trace_id", "risk_level", "actions", "verification_steps", "rollback_steps", "requires_approval", "status"],
+  "properties": {
+    "plan_id": {"type": "string", "pattern": "^rp_[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"},
+    "trace_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"},
+    "risk_level": {"enum": ["low", "high"]},
+    "actions": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^建议："}},
+    "verification_steps": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 256}},
+    "rollback_steps": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 256}},
+    "requires_approval": {"type": "boolean"},
+    "status": {"enum": ["draft", "pending_approval"]}
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {"if": {"properties": {"risk_level": {"const": "high"}}}, "then": {"properties": {"requires_approval": {"const": true}, "status": {"const": "pending_approval"}}}},
+    {"if": {"properties": {"risk_level": {"const": "low"}}}, "then": {"properties": {"requires_approval": {"const": false}, "status": {"const": "draft"}}}}
+  ]
+}
