@@ -17,12 +17,13 @@ def ledger_record(
     event_type: str,
     payload_ref: str,
     prev_hash: str = "",
+    actor: str = "test",
 ) -> dict[str, str]:
     record = {
         "event_id": event_id,
         "trace_id": trace_id,
         "at": "2026-08-04T09:00:00Z",
-        "actor": "test",
+        "actor": actor,
         "event_type": event_type,
         "payload_ref": payload_ref,
         "prev_hash": prev_hash,
@@ -81,12 +82,21 @@ def approved(trace_id: str = "tr_audit_001") -> ApprovalRecord:
 
 def valid_ledger(trace_id: str = "tr_audit_001") -> list[dict[str, str]]:
     first = ledger_record(
-        "led_001", trace_id, "incident.created", f"incident:{trace_id}"
+        "led_001", trace_id, "incident.created", f"incident:{trace_id}", actor="commander"
     )
     second = ledger_record(
-        "led_002", trace_id, "audit.requested", f"response:rp_{trace_id}", first["hash"]
+        "led_002", trace_id, "evidence.completed", "evidence:ev_evt_s01_001", first["hash"], actor="evidence"
     )
-    return [first, second]
+    third = ledger_record(
+        "led_003", trace_id, "response.pending_approval", f"response:rp_{trace_id}", second["hash"], actor="response"
+    )
+    fourth = ledger_record(
+        "led_004", trace_id, "approval.approved", "approval:approved", third["hash"], actor="human_operator"
+    )
+    fifth = ledger_record(
+        "led_005", trace_id, "audit.projected", f"audit:{trace_id}", fourth["hash"], actor="audit"
+    )
+    return [first, second, third, fourth, fifth]
 
 
 def test_high_risk_without_evidence_or_approval_is_not_qualified() -> None:
@@ -135,4 +145,3 @@ def test_trace_source_classification_and_rollback_gaps_are_reported() -> None:
         "evidence.classification:ev_evt_s01_001",
         "response.rollback_steps",
     }
-

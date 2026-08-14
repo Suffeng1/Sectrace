@@ -1,0 +1,15 @@
+{
+  "scenario_id": "S-intake-golden",
+  "title": "Synthetic Intake Golden Fixture",
+  "real_data": false,
+  "events": [
+    {
+      "event_ref": "evt_intake_001",
+      "event_type": "anomalous_login",
+      "at": "2026-08-04T09:00:00Z",
+      "region_label": "synthetic-region-a",
+      "subject": "synthetic-user-a"
+    }
+  ],
+  "expected": {}
+}

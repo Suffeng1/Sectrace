@@ -2,7 +2,7 @@
 
 ## Objective
 
-Prepare a safe, inspectable multi-Agent audit-demo workspace for the Agent Infra competition. The planned demo will coordinate four bounded Agents around one fixed, synthetic incident case and make its reasoning traceable.
+Maintain a safe, inspectable multi-Agent audit-demo workspace for the Agent Infra competition. The demo coordinates four bounded Agents around fixed synthetic incident cases and makes their reasoning traceable.
 
 ## P-00 acceptance criteria
 
@@ -30,7 +30,7 @@ Prepare a safe, inspectable multi-Agent audit-demo workspace for the Agent Infra
 ## T-05 acceptance criteria
 
 - Replay S01 through Commander, Evidence, Response, and Audit with one unchanged `trace_id`.
-- Expose exactly five synthetic/read-only MCP tools with v1.0 envelopes and reject unsupported execution names.
+- Expose exactly six synthetic/read-only MCP tools with v1.0 envelopes and reject unsupported execution names. The authoritative names are `src/app/mcp_adapter.py::TOOL_NAMES`.
 - Keep high-risk response plans `pending_approval`; local human approval records never execute an action.
 - Validate a canonical SHA-256 ledger and project an `AuditBundle`.
 - Provide a judge-visible local UI, four production Worker prompts/YAML, one Team YAML, tests, and reproduction materials.

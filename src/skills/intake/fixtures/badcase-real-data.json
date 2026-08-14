@@ -1,0 +1,15 @@
+{
+  "scenario_id": "S-intake-real-marker",
+  "real_data": true,
+  "events": [
+    {
+      "event_ref": "evt_intake_bad_001",
+      "event_type": "anomalous_login",
+      "at": "2026-08-04T09:00:00Z",
+      "subject": "synthetic-user-badcase"
+    }
+  ],
+  "expected": {
+    "severity_hint": "high"
+  }
+}

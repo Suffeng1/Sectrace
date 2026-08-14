@@ -1,0 +1,1 @@
+{"ledger_records":[{"event_id":"ledger_bad_001","trace_id":"tr_audit_001","at":"2026-08-04T09:00:00Z","actor":"audit","event_type":"audit.projected","payload_ref":"audit:tr_audit_001","prev_hash":"","hash":"not-a-canonical-hash"}]}

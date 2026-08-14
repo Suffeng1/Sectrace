@@ -1,19 +1,19 @@
 """Advice-only response planning for synthetic SecTrace evidence."""
 
 from src.app.contracts import EvidenceItem, ResponsePlan
-from src.skills.response.plan import has_corroborated_risk
+from src.skills.response.plan import validate_evidence_items
 
 
 def create_response_plan(evidence_items: list[EvidenceItem]) -> ResponsePlan:
     """Create a deterministic plan without executing or simulating any action."""
-    if not evidence_items:
-        raise ValueError("response planning requires supplied evidence")
-    trace_ids = {item.trace_id for item in evidence_items}
-    if len(trace_ids) != 1:
-        raise ValueError("response evidence must share one trace_id")
-
-    trace_id = trace_ids.pop()
-    if has_corroborated_risk(evidence_items):
+    normalized_items = validate_evidence_items(evidence_items)
+    trace_id = normalized_items[0]["trace_id"]
+    if all(
+        item["classification"] == "fact"
+        and item["confidence"] == "high"
+        and item["evidence_level"] in {"corroborated", "strong"}
+        for item in normalized_items
+    ):
         return ResponsePlan(
             plan_id=f"rp_{trace_id}",
             trace_id=trace_id,
@@ -49,4 +49,3 @@ def create_response_plan(evidence_items: list[EvidenceItem]) -> ResponsePlan:
         requires_approval=False,
         status="draft",
     )
-

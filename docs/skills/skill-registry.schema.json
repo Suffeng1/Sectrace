@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sectrace.local/skills/registry/1.0/schema.json",
+  "type": "object",
+  "required": ["schema_version", "contract_schema_version", "role_chain", "skills"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract_schema_version": {"const": "1.0"},
+    "role_chain": {"const": ["Commander", "Evidence", "Response", "Audit"]},
+    "skills": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"$ref": "#/$defs/intake"},
+        {"$ref": "#/$defs/evidence"},
+        {"$ref": "#/$defs/response"},
+        {"$ref": "#/$defs/audit"}
+      ],
+      "items": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "relative_path": {"type": "string", "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9._/-]+$"},
+    "skill": {
+      "type": "object",
+      "required": ["name", "description", "version", "role", "skill_path", "changelog_path", "entrypoint", "input_schema", "output_schema", "mcp_tools", "lifecycle", "evaluation_scope", "official_skill", "installation"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "version": {"pattern": "^1\\.0\\.0$"},
+        "role": {"enum": ["Commander", "Evidence", "Response", "Audit"]},
+        "skill_path": {"$ref": "#/$defs/relative_path"},
+        "changelog_path": {"$ref": "#/$defs/relative_path"},
+        "entrypoint": {"type": "string", "pattern": "^src\\.[A-Za-z0-9_]+(?:\\.[A-Za-z0-9_]+)+$"},
+        "input_schema": {"$ref": "#/$defs/relative_path"},
+        "output_schema": {"$ref": "#/$defs/relative_path"},
+        "mcp_tools": {"const": []},
+        "lifecycle": {"type": "object", "required": ["stage", "status", "rollback"], "properties": {"stage": {"const": "versioned"}, "status": {"const": "qa_passed_registry_pending_release"}, "rollback": {"const": "restore_skill_directory_and_registry_entry"}}, "additionalProperties": false},
+        "evaluation_scope": {"type": "object", "required": ["scope", "evidence", "per_skill_score", "runtime_live_status"], "properties": {"scope": {"const": "full_local_pipeline_only"}, "evidence": {"const": "docs/verification/V-OPT2-02-fourth-corrected-independent-qa.md"}, "per_skill_score": {"const": "not_claimed"}, "runtime_live_status": {"const": "not_claimed"}}, "additionalProperties": false},
+        "official_skill": {"const": false},
+        "installation": {"const": "not_installed"}
+      },
+      "additionalProperties": false
+    },
+    "intake": {"allOf": [{"$ref": "#/$defs/skill"}, {"properties": {"name": {"const": "sectrace-intake"}, "role": {"const": "Commander"}, "entrypoint": {"const": "src.skills.intake.normalize.normalize_scenario"}}}]},
+    "evidence": {"allOf": [{"$ref": "#/$defs/skill"}, {"properties": {"name": {"const": "sectrace-evidence"}, "role": {"const": "Evidence"}, "entrypoint": {"const": "src.agents.evidence.service.analyze_case"}}}]},
+    "response": {"allOf": [{"$ref": "#/$defs/skill"}, {"properties": {"name": {"const": "response"}, "role": {"const": "Response"}, "entrypoint": {"const": "src.agents.response.service.create_response_plan"}}}]},
+    "audit": {"allOf": [{"$ref": "#/$defs/skill"}, {"properties": {"name": {"const": "audit"}, "role": {"const": "Audit"}, "entrypoint": {"const": "src.agents.audit.service.build_audit_review"}}}]}
+  }
+}

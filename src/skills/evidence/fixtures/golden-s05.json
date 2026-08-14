@@ -1,0 +1,9 @@
+{
+  "scenario_id": "S05",
+  "title": "Synthetic incomplete evidence case",
+  "real_data": false,
+  "events": [
+    {"event_ref": "evt_s05_001", "event_type": "anomalous_login", "at": "2026-08-04T11:00:00Z", "region_label": "foreign-region", "subject": "synthetic-user-e"}
+  ],
+  "expected": {"intake": "accept", "classification": "unknown", "evidence_level": "insufficient", "conclusion": "无法确认"}
+}

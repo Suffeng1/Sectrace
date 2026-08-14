@@ -1,4 +1,5 @@
 from copy import deepcopy
+import json
 from pathlib import Path
 
 import pytest
@@ -81,11 +82,17 @@ def test_scenario_id_cannot_escape_the_approved_scenario_directory(
 
 
 @pytest.mark.parametrize("scenario_id", [f"S{index:02d}" for index in range(1, 25)])
-def test_all_approved_scenario_ids_remain_accepted(scenario_id: str) -> None:
+def test_all_scenario_ids_follow_their_declared_intake_oracle(scenario_id: str) -> None:
     adapter = SafeMCPAdapter(SCENARIOS)
+    scenario = json.loads((SCENARIOS / f"{scenario_id}.json").read_text(encoding="utf-8"))
 
-    if scenario_id == "S11":
-        with pytest.raises(ValueError, match="synthetic or de-identified"):
+    if scenario["expected"].get("intake") == "reject":
+        expected_error = (
+            "synthetic or de-identified"
+            if scenario.get("real_data") is True
+            else "invalid intake payload"
+        )
+        with pytest.raises(ValueError, match=expected_error):
             adapter.call_tool(
                 "sectrace.intake.create_incident", scenario_id=scenario_id
             )

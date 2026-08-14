@@ -1,0 +1,9 @@
+{
+  "scenario_id": "S11",
+  "title": "Explicit real-data marker rejection",
+  "real_data": true,
+  "events": [
+    {"event_ref": "evt_s11_001", "event_type": "anomalous_login", "at": "2026-08-04T12:20:00Z", "subject": "synthetic-user-k"}
+  ],
+  "expected": {"intake": "reject", "reason": "real_data_marker"}
+}

@@ -24,3 +24,22 @@
 - Use `code` for repository-only work, `runtime` for Docker/AgentTeams/MCP work, and `live` before any Matrix or S01 activity. Historical PASS evidence never replaces the current preflight.
 - Every **runtime mutation** still requires separate, explicit user authorization. The preflight **must not be used as a launcher** or treated as permission to start, stop, restart, apply, delete, send, retry, approve, commit, or push.
 - Follow `docs/runtime/reboot-preflight.md`; stop at the first blocked category and never touch `sectrace-smoke` as part of resume checks.
+
+## Controller notification protocol
+
+- Every delegated Codex task must receive the controller task's `thread_id` and
+  `host_id` in its initial prompt. The controller must not rely on polling alone.
+- Before a delegated task ends a turn with any terminal or attention-required
+  state, it must use the Codex task messaging tool to send a structured status
+  message to the controller. This applies to `COMPLETE`, `BLOCKED`,
+  `AUTH_REQUIRED`, `QA_PASS`, and `QA_FAIL`.
+- The message must include: task ID, status, tests/result, files changed, blocker
+  or next handoff, and whether commit/push/runtime/live activity occurred.
+- Send the controller message before the delegated task's final answer. A final
+  answer in the delegated task is not a substitute for this notification.
+- If the messaging tool is unavailable or the send fails, the delegated task
+  must state `CONTROLLER_NOTIFY_FAILED` in its final answer. The controller must
+  then use `wait_threads` before starting dependent work.
+- The controller records each created task and actively waits for its status.
+  Receiving a notification does not waive independent QA or any authorization
+  gate.
