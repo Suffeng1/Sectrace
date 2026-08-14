@@ -10,8 +10,8 @@ SecTrace 是一个面向安全事件分析与审计演示的多 Agent 协作项�
 - V-08 clean distinct trace：PASS。
 - S-09 Codex Security：PASS。
 - V-05 最终验收：PASS。
-- 当前 OPT2-00 候选工作树全量测试：`125 passed`。历史验证记录中的
-  `114 passed`/`122 passed` 是各自当时提交或工作树的 point-in-time 结果，
+- 当前提交候选全量测试：`399 passed`。历史验证记录中的
+  `114 passed`/`122 passed`/`125 passed` 等数字是各自当时提交或工作树的 point-in-time 结果，
   不被回写为当前数字。
 
 详细结果见 [交付状态](docs/status.md)、[V-05 最终验收](docs/verification/V-05-final-reconciliation.md) 和 [演示证据索引](outputs/demo/evidence-index.md)。
@@ -57,6 +57,24 @@ Manager（仅路由）
 
 服务使用 MCP Streamable HTTP，默认监听 `127.0.0.1:19090/mcp`。未知工具、路径型 scenario/run ID、重复或越序阶段、错误 trace/plan、伪造审批和持久化篡改都会被拒绝。
 
+### 四个版本化本地 Skill
+
+| Registry 名称 | 角色 | 入口 | 工程资产 |
+| --- | --- | --- | --- |
+| `sectrace-intake` | Commander | `src.skills.intake.normalize.normalize_scenario` | SKILL、CHANGELOG、输入/输出 Schema、golden/badcase fixture |
+| `sectrace-evidence` | Evidence | `src.agents.evidence.service.analyze_case` | SKILL、CHANGELOG、输入/输出 Schema、golden/badcase fixture |
+| `response` | Response | `src.agents.response.service.create_response_plan` | SKILL、CHANGELOG、输入/输出 Schema、golden/badcase fixture |
+| `audit` | Audit | `src.agents.audit.service.build_audit_review` | SKILL、CHANGELOG、输入/输出 Schema、golden/badcase fixture |
+
+四个 Skill 当前版本均为 `1.0.0`，兼容 Contract schema `1.0`，并按
+`Commander -> Evidence -> Response -> Audit` 固定角色链登记在
+[`docs/skills/skill-registry.json`](docs/skills/skill-registry.json)。运行
+`python scripts/check-skill-registry.py` 可只读校验 registry、仓库内路径、
+frontmatter、版本、Schema 与可调用入口。该 registry 是本地发现与验证元数据，
+不会安装全局 Skill、增加 MCP 工具或声称阿里云官方用云 Skill 已接入；当前也
+不发布未经单独评测的 per-Skill 分数。发布规则见
+[`docs/skills/compatibility-and-release.md`](docs/skills/compatibility-and-release.md)。
+
 ## 技术栈
 
 | 类别 | 技术 |
@@ -67,6 +85,7 @@ Manager（仅路由）
 | Web 演示 | Starlette、Uvicorn、原生 HTML/JavaScript |
 | 图关系 | NetworkX |
 | 测试 | pytest、Playwright（可选浏览器测试） |
+| Skill 契约 | SKILL.md、JSON Schema Draft 2020-12、版本化 registry |
 | Agent 编排 | AgentTeams / HiClaw、OpenClaw Worker runtime |
 | 协作界面 | Matrix / Element |
 | 模型入口 | Higress / AgentTeams model gateway |
@@ -111,12 +130,6 @@ Linux/macOS 可以运行 Python 演示和测试，但仓库提供的运行时 pr
 ```powershell
 git clone https://github.com/Suffeng1/Sectrace.git
 cd Sectrace
-```
-
-如果默认分支尚未合并本项目版本，请切换到发布分支：
-
-```powershell
-git switch codex/sectrace-bootstrap
 ```
 
 ### 3. 创建虚拟环境并安装依赖
@@ -315,6 +328,9 @@ python -m pytest -q -p no:cacheprovider
 
 # 安全与仓库卫生
 python -m pytest -q -p no:cacheprovider tests/security
+
+# Skill registry 一致性
+python scripts/check-skill-registry.py
 
 # Git 空白和补丁检查
 git diff --check
